@@ -59,7 +59,8 @@ public class PatientExamService {
 
     /**
      * Add patient into the system if not present
-     * @param pid patient id
+     *
+     * @param pid  patient id
      * @param name name of the patient
      */
     public void addPatient(int pid, String name) {
@@ -72,6 +73,7 @@ public class PatientExamService {
 
     /**
      * Checks if patient is already present in the system
+     *
      * @param pid patient id
      * @return
      */
@@ -90,6 +92,7 @@ public class PatientExamService {
 
     /**
      * Deletes the patient
+     *
      * @param pid patient id
      */
     public void deletePatient(int pid) {
@@ -105,6 +108,7 @@ public class PatientExamService {
 
     /**
      * Adds the exam to exam record and patient record
+     *
      * @param eid exam id
      * @param pid patient id
      */
@@ -125,6 +129,7 @@ public class PatientExamService {
 
     /**
      * Checks if exam is present in the system
+     *
      * @param eid
      * @return exam id
      */
@@ -139,20 +144,23 @@ public class PatientExamService {
 
     /**
      * Deletes the exam from exam record and patient record
+     *
      * @param eid exam id
      */
     public void deleteExam(int eid) {
 
-        for (int i = 0; i < examRecord.size(); i++) {
-            if (examRecord.get(i) == eid)
-                examRecord.remove(i);
-        }
+        if (checkIfExamPresent(eid)) {
+            for (int i = 0; i < examRecord.size(); i++) {
+                if (examRecord.get(i) == eid)
+                    examRecord.remove(i);
+            }
 
-        for (Patient patient : ptRecord) {
-            for (int j = 0; j < patient.getEid().size(); j++) {
-                int examId = patient.getEid().get(j);
-                if (examId == eid) {
-                    patient.getEid().remove(j);
+            for (Patient patient : ptRecord) {
+                for (int j = 0; j < patient.getEid().size(); j++) {
+                    int examId = patient.getEid().get(j);
+                    if (examId == eid) {
+                        patient.getEid().remove(j);
+                    }
                 }
             }
         }
